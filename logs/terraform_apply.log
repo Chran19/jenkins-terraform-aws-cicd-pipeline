@@ -26,3 +26,4 @@ ec2_public_ip = "54.210.88.142"
 security_group_id = "sg-098df123cb4a56e78"
 subnet_id = "subnet-03e54b67fa9d21c43"
 vpc_id = "vpc-07b46ca893e1102fd"
+

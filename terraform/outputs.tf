@@ -32,3 +32,4 @@ output "app_url" {
   description = "Direct web browser URL to access the deployed CloudOps application"
   value       = "http://${aws_instance.app_server.public_ip}:${var.app_port}"
 }
+

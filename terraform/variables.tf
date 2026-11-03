@@ -63,3 +63,4 @@ variable "key_name" {
   description = "Optional AWS EC2 key pair name for administrative SSH key-based access"
   default     = ""
 }
+

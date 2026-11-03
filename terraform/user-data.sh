@@ -27,7 +27,7 @@ cd "${APP_DIR}"
 # Clone repository or setup application bundle
 if [ ! -d "${APP_DIR}/.git" ]; then
     echo "[INFO] Cloning application repository from GitHub..."
-    git clone https://github.com/Chran19/CA_2.git "${APP_DIR}" || {
+    git clone https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline.git "${APP_DIR}" || {
         echo "[WARN] Direct git clone failed or requires authentication. Creating standalone app runtime..."
         cat << 'EOF' > "${APP_DIR}/server.js"
 const http = require('http');
@@ -78,3 +78,4 @@ systemctl enable cloudops.service
 systemctl restart cloudops.service
 
 echo "[SUCCESS] CloudOps Service launched and listening on port 3000."
+

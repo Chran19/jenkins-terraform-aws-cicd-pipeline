@@ -12,3 +12,4 @@ ami_id            = "ami-0c7217cdde317cfec"
 app_port          = 3000
 allowed_ssh_cidr  = "0.0.0.0/0"
 key_name          = "devops-keypair"
+

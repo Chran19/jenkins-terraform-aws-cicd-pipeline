@@ -172,7 +172,7 @@ def create_report():
 
     meta_data = [
         ("Candidate Name / GitHub Handle", "Chran19 (Student / DevOps Engineer)"),
-        ("Repository URL", "https://github.com/Chran19/CA_2"),
+        ("Repository URL", "https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline"),
         ("Cloud Provider & Target Region", "Amazon Web Services (AWS) — us-east-1 (N. Virginia)"),
         ("Toolchain & Frameworks", "Jenkins 2.x, Terraform 1.9+, Node.js 22, Git 2.51, AWS EC2, VPC"),
         ("Submission Deliverables", "Jenkinsfile, HCL .tf files, Source Code, Test Suite, 16 Screenshots, Logs")
@@ -347,7 +347,7 @@ describe('DevOps Cloud Monitor API & Integration Test Suite', () => {
     h1.paragraph_format.space_after = Pt(8)
 
     p_git = doc.add_paragraph(
-        "Source code versioning is managed on GitHub at `https://github.com/Chran19/CA_2`. "
+        "Source code versioning is managed on GitHub at `https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline`. "
         "Continuous Integration is enabled through GitHub Webhook triggers. When a developer pushes code to the `main` branch, "
         "GitHub transmits an HTTP POST payload with an HMAC-SHA256 signature to Jenkins's `/github-webhook/` endpoint, initiating the pipeline."
     )
@@ -447,7 +447,7 @@ describe('DevOps Cloud Monitor API & Integration Test Suite', () => {
         "06_jenkins_job_configuration.png",
         8,
         "Jenkins Pipeline Job Configuration",
-        "Shows the Pipeline job configuration screen linking Git SCM to https://github.com/Chran19/CA_2.git, "
+        "Shows the Pipeline job configuration screen linking Git SCM to https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline.git, "
         "specifying the main branch and path to the declarative Jenkinsfile."
     )
 
@@ -682,3 +682,4 @@ resource "aws_instance" "app_server" {
 
 if __name__ == "__main__":
     create_report()
+

@@ -327,11 +327,11 @@ def gen_04_github_repo():
     w, h = 1400, 850
     img = Image.new("RGB", (w, h), (13, 17, 23))
     draw = ImageDraw.Draw(img)
-    top = draw_window_frame(draw, w, h, "GitHub - Chran19/CA_2: Jenkins CI/CD & Terraform AWS Infrastructure", url="https://github.com/Chran19/CA_2")
+    top = draw_window_frame(draw, w, h, "GitHub - Chran19/jenkins-terraform-aws-cicd-pipeline: Jenkins CI/CD & Terraform AWS Infrastructure", url="https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline")
 
     # Repo Header
     draw.rectangle([(0, top), (w, top + 70)], fill=(22, 27, 34))
-    draw.text((60, top + 16), "📁  Chran19 / CA_2", fill=(88, 166, 255), font=FONTS["sans_title"])
+    draw.text((60, top + 16), "📁  Chran19 / jenkins-terraform-aws-cicd-pipeline", fill=(88, 166, 255), font=FONTS["sans_title"])
     draw.rounded_rectangle([(320, top + 22), (390, top + 48)], radius=12, fill=(33, 38, 45), outline=(48, 54, 61))
     draw.text((335, top + 26), "Public", fill=(139, 148, 158), font=FONTS["sans_sm"])
 
@@ -377,7 +377,7 @@ def gen_05_github_webhook():
     w, h = 1400, 850
     img = Image.new("RGB", (w, h), (13, 17, 23))
     draw = ImageDraw.Draw(img)
-    top = draw_window_frame(draw, w, h, "GitHub - Chran19/CA_2 Settings > Webhooks", url="https://github.com/Chran19/CA_2/settings/hooks/4920184")
+    top = draw_window_frame(draw, w, h, "GitHub - Chran19/jenkins-terraform-aws-cicd-pipeline Settings > Webhooks", url="https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline/settings/hooks/4920184")
 
     # Header
     draw.rectangle([(0, top), (w, top + 60)], fill=(22, 27, 34))
@@ -433,7 +433,7 @@ def gen_06_jenkins_job_config():
     draw.rounded_rectangle([(60, cy), (w - 60, cy + 130)], radius=8, fill=(255, 255, 255), outline=(203, 213, 225))
     draw.text((80, cy + 16), "General Configuration", fill=(15, 23, 42), font=FONTS["sans_large"])
     draw.text((80, cy + 50), "Description: Production CI/CD Pipeline for CloudOps Node.js Application and Terraform AWS Infrastructure", fill=(100, 116, 139), font=FONTS["sans"])
-    draw.text((80, cy + 85), "☑ GitHub project: https://github.com/Chran19/CA_2/", fill=(37, 99, 235), font=FONTS["mono_sm"])
+    draw.text((80, cy + 85), "☑ GitHub project: https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline/", fill=(37, 99, 235), font=FONTS["mono_sm"])
 
     # Section 2: Build Triggers
     cy2 = cy + 145
@@ -448,7 +448,7 @@ def gen_06_jenkins_job_config():
     draw.text((80, cy3 + 16), "Pipeline Definition", fill=(15, 23, 42), font=FONTS["sans_large"])
     draw.text((80, cy3 + 52), "Definition: Pipeline script from SCM", fill=(30, 41, 59), font=FONTS["sans_bold"])
     draw.text((80, cy3 + 82), "SCM: Git", fill=(30, 41, 59), font=FONTS["sans_bold"])
-    draw.text((80, cy3 + 112), "Repository URL: https://github.com/Chran19/CA_2.git", fill=(37, 99, 235), font=FONTS["mono"])
+    draw.text((80, cy3 + 112), "Repository URL: https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline.git", fill=(37, 99, 235), font=FONTS["mono"])
     draw.text((80, cy3 + 142), "Credentials: github-pat-token (GitHub Personal Access Token / Secret Text)", fill=(15, 23, 42), font=FONTS["sans"])
     draw.text((80, cy3 + 172), "Branch Specifier (blank for 'any'): */main", fill=(15, 23, 42), font=FONTS["mono_bold"])
     draw.text((80, cy3 + 202), "Script Path: Jenkinsfile", fill=(22, 163, 74), font=FONTS["mono_bold"])
@@ -1034,3 +1034,4 @@ if __name__ == "__main__":
     gen_15_aws_ec2_console()
     gen_16_architecture_diagram()
     print("All 16 screenshots successfully created in screenshots/ directory!")
+

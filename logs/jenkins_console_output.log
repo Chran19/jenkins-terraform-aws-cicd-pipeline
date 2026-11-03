@@ -6,12 +6,12 @@ The recommended git tool is: NONE
 using credential github-pat-token
  > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/DevOps-CI-CD-Pipeline/.git # timeout=10
 Fetching changes from the remote Git repository
- > git config remote.origin.url https://github.com/Chran19/CA_2.git # timeout=10
-Fetching upstream changes from https://github.com/Chran19/CA_2.git
+ > git config remote.origin.url https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline.git # timeout=10
+Fetching upstream changes from https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline.git
  > git --version # timeout=10
  > git --version # 'git version 2.51.0'
 using GIT_ASKPASS to set credentials GitHub Personal Access Token
- > git fetch --tags --force --progress -- https://github.com/Chran19/CA_2.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git fetch --tags --force --progress -- https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline.git +refs/heads/*:refs/remotes/origin/* # timeout=10
  > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
 Checking out Revision a7e8f1c9d2b45e67 (refs/remotes/origin/main)
  > git config core.sparsecheckout # timeout=10
@@ -493,3 +493,4 @@ Artifacts preserved. Infrastructure active in us-east-1.
 [Pipeline] // node
 [Pipeline] End of Pipeline
 Finished: SUCCESS
+

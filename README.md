@@ -44,7 +44,7 @@ This project delivers a complete Continuous Integration, Continuous Delivery (CI
 |                                  CI/CD & IaC AUTOMATION LIFECYCLE                                 |
 +---------------------------------------------------------------------------------------------------+
 
- [ Developer ] ---> git push ---> [ GitHub Repository ] (Chran19/CA_2)
+ [ Developer ] ---> git push ---> [ GitHub Repository ] (Chran19/jenkins-terraform-aws-cicd-pipeline)
                                             |
                                   Webhook HTTP POST
                                             v
@@ -250,8 +250,8 @@ terraform output
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/Chran19/CA_2.git
-cd CA_2
+git clone https://github.com/Chran19/jenkins-terraform-aws-cicd-pipeline.git
+cd jenkins-terraform-aws-cicd-pipeline
 
 # 2. Run unit tests
 npm test
@@ -262,3 +262,4 @@ npm start
 # 4. Open in web browser
 # Navigate to: http://localhost:3000
 ```
+
