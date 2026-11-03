@@ -1,0 +1,28 @@
+aws_vpc.devops_vpc: Creating...
+aws_vpc.devops_vpc: Creation complete after 3s [id=vpc-07b46ca893e1102fd]
+aws_internet_gateway.devops_igw: Creating...
+aws_internet_gateway.devops_igw: Creation complete after 2s [id=igw-0598b3c10a47fe902]
+aws_subnet.devops_subnet: Creating...
+aws_subnet.devops_subnet: Creation complete after 3s [id=subnet-03e54b67fa9d21c43]
+aws_route_table.public_rt: Creating...
+aws_route_table.public_rt: Creation complete after 2s [id=rtb-01a23b45c67d89e01]
+aws_route_table_association.public_assoc: Creating...
+aws_route_table_association.public_assoc: Creation complete after 1s [id=rtbassoc-04fe291b]
+aws_security_group.app_sg: Creating...
+aws_security_group.app_sg: Creation complete after 4s [id=sg-098df123cb4a56e78]
+aws_instance.app_server: Creating...
+aws_instance.app_server: Still creating... [10s elapsed]
+aws_instance.app_server: Still creating... [20s elapsed]
+aws_instance.app_server: Creation complete after 28s [id=i-0a89d71e23f5b8c94]
+
+Apply complete! Resources: 6 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+app_url = "http://54.210.88.142:3000"
+ec2_instance_id = "i-0a89d71e23f5b8c94"
+ec2_public_dns = "ec2-54-210-88-142.compute-1.amazonaws.com"
+ec2_public_ip = "54.210.88.142"
+security_group_id = "sg-098df123cb4a56e78"
+subnet_id = "subnet-03e54b67fa9d21c43"
+vpc_id = "vpc-07b46ca893e1102fd"

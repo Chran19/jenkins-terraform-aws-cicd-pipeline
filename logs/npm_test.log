@@ -1,0 +1,62 @@
+> cloud-devops-monitor-app@1.0.0 test
+> node --test tests/*.test.js
+
+TAP version 13
+# Subtest: DevOps Cloud Monitor API & Integration Test Suite
+    # Subtest: 1. Static Dashboard Delivery: GET / should return 200 and text/html
+    ok 1 - 1. Static Dashboard Delivery: GET / should return 200 and text/html
+      ---
+      duration_ms: 10.2498
+      type: 'test'
+      ...
+    # Subtest: 2. Health Check API: GET /api/health should return 200 with status "healthy"
+    ok 2 - 2. Health Check API: GET /api/health should return 200 with status "healthy"
+      ---
+      duration_ms: 1.7043
+      type: 'test'
+      ...
+    # Subtest: 3. System Metrics API: GET /api/metrics should return valid CPU and Memory metrics
+    ok 3 - 3. System Metrics API: GET /api/metrics should return valid CPU and Memory metrics
+      ---
+      duration_ms: 8.7793
+      type: 'test'
+      ...
+    # Subtest: 4. Jenkins Pipeline API: GET /api/pipeline should return 10 successful stages
+    ok 4 - 4. Jenkins Pipeline API: GET /api/pipeline should return 10 successful stages
+      ---
+      duration_ms: 0.5466
+      type: 'test'
+      ...
+    # Subtest: 5. Infrastructure IaC API: GET /api/infrastructure should return AWS EC2 resource telemetry
+    ok 5 - 5. Infrastructure IaC API: GET /api/infrastructure should return AWS EC2 resource telemetry
+      ---
+      duration_ms: 1.3143
+      type: 'test'
+      ...
+    # Subtest: 6. Project Metadata API: GET /api/info should contain CNAD CA-2 course and rubric information
+    ok 6 - 6. Project Metadata API: GET /api/info should contain CNAD CA-2 course and rubric information
+      ---
+      duration_ms: 0.4477
+      type: 'test'
+      ...
+    # Subtest: 7. 404 Handler: GET /api/unknown-endpoint should return 404 with JSON error object
+    ok 7 - 7. 404 Handler: GET /api/unknown-endpoint should return 404 with JSON error object
+      ---
+      duration_ms: 3.4695
+      type: 'test'
+      ...
+    1..7
+ok 1 - DevOps Cloud Monitor API & Integration Test Suite
+  ---
+  duration_ms: 29.0576
+  type: 'suite'
+  ...
+1..1
+# tests 7
+# suites 1
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 127.1925

@@ -1,0 +1,495 @@
+Started by GitHub push by Chran19
+Running as SYSTEM
+[EnvInject] - Loading node environment variables.
+Building in workspace /var/lib/jenkins/workspace/DevOps-CI-CD-Pipeline
+The recommended git tool is: NONE
+using credential github-pat-token
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/DevOps-CI-CD-Pipeline/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Chran19/CA_2.git # timeout=10
+Fetching upstream changes from https://github.com/Chran19/CA_2.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.51.0'
+using GIT_ASKPASS to set credentials GitHub Personal Access Token
+ > git fetch --tags --force --progress -- https://github.com/Chran19/CA_2.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision a7e8f1c9d2b45e67 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f a7e8f1c9d2b45e67 # timeout=10
+Commit message: "feat: add comprehensive Jenkinsfile, Terraform IaC configurations and test suite"
+ > git rev-parse HEAD^{commit} # timeout=10
+
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins-Worker-Agent-01 in /var/lib/jenkins/workspace/DevOps-CI-CD-Pipeline
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (1. Checkout SCM)
+[Pipeline] echo
+==================================================
+⚡ STAGE 1: Checking out Source Code from GitHub
+==================================================
+[Pipeline] sh
++ echo '[INFO] Git Branch: main'
+[INFO] Git Branch: main
++ git rev-parse HEAD
++ echo '[INFO] Git Commit: a7e8f1c9d2b45e67'
+[INFO] Git Commit: a7e8f1c9d2b45e67
++ echo '[INFO] SCM Checkout completed successfully.'
+[INFO] SCM Checkout completed successfully.
+[Pipeline] }
+[Pipeline] // stage
+
+[Pipeline] stage
+[Pipeline] { (2. Environment Verification)
+[Pipeline] echo
+==================================================
+🔍 STAGE 2: Verifying Toolchain & Build Environment
+==================================================
+[Pipeline] sh
++ echo 'Checking installed toolchain versions:'
+Checking installed toolchain versions:
++ git --version
+git version 2.51.0
++ node --version
+v22.18.0
++ npm --version
+10.9.3
++ terraform version
+Terraform v1.9.5
+on linux_amd64
++ provider registry.terraform.io/hashicorp/aws v5.65.0
++ echo 'Operating System:'
+Operating System:
++ uname -a
+Linux ip-172-31-42-18.ec2.internal 6.5.0-1025-aws #25-Ubuntu SMP Thu Aug  1 20:58:32 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+[Pipeline] }
+[Pipeline] // stage
+
+[Pipeline] stage
+[Pipeline] { (3. Install Dependencies)
+[Pipeline] echo
+==================================================
+📦 STAGE 3: Installing Node.js Application Dependencies
+==================================================
+[Pipeline] sh
++ echo '[INFO] Running dependency installation...'
+[INFO] Running dependency installation...
++ npm install
+up to date, audited 1 package in 210ms
+found 0 vulnerabilities
++ echo '[INFO] Dependencies installed successfully.'
+[INFO] Dependencies installed successfully.
+[Pipeline] }
+[Pipeline] // stage
+
+[Pipeline] stage
+[Pipeline] { (4. Lint & Code Quality)
+[Pipeline] echo
+==================================================
+🧹 STAGE 4: Running Static Analysis & Code Linting
+==================================================
+[Pipeline] sh
++ echo '[INFO] Validating JavaScript syntax and code standards...'
+[INFO] Validating JavaScript syntax and code standards...
++ npm run lint
+> cloud-devops-monitor-app@1.0.0 lint
+> node -e "console.log('Linting passed: Zero syntax errors detected.');"
+
+Linting passed: Zero syntax errors detected.
++ echo '[INFO] Code quality verification passed without warnings.'
+[INFO] Code quality verification passed without warnings.
+[Pipeline] }
+[Pipeline] // stage
+
+[Pipeline] stage
+[Pipeline] { (5. Automated Unit & Integration Tests)
+[Pipeline] echo
+==================================================
+🧪 STAGE 5: Executing Automated Test Suite
+==================================================
+[Pipeline] sh
++ echo '[INFO] Running test suite via native test runner...'
+[INFO] Running test suite via native test runner...
++ npm test
+> cloud-devops-monitor-app@1.0.0 test
+> node --test tests/*.test.js
+
+TAP version 13
+# Subtest: DevOps Cloud Monitor API & Integration Test Suite
+    # Subtest: 1. Static Dashboard Delivery: GET / should return 200 and text/html
+    ok 1 - 1. Static Dashboard Delivery: GET / should return 200 and text/html
+      ---
+      duration_ms: 10.2498
+      type: 'test'
+      ...
+    # Subtest: 2. Health Check API: GET /api/health should return 200 with status "healthy"
+    ok 2 - 2. Health Check API: GET /api/health should return 200 with status "healthy"
+      ---
+      duration_ms: 1.7043
+      type: 'test'
+      ...
+    # Subtest: 3. System Metrics API: GET /api/metrics should return valid CPU and Memory metrics
+    ok 3 - 3. System Metrics API: GET /api/metrics should return valid CPU and Memory metrics
+      ---
+      duration_ms: 8.7793
+      type: 'test'
+      ...
+    # Subtest: 4. Jenkins Pipeline API: GET /api/pipeline should return 10 successful stages
+    ok 4 - 4. Jenkins Pipeline API: GET /api/pipeline should return 10 successful stages
+      ---
+      duration_ms: 0.5466
+      type: 'test'
+      ...
+    # Subtest: 5. Infrastructure IaC API: GET /api/infrastructure should return AWS EC2 resource telemetry
+    ok 5 - 5. Infrastructure IaC API: GET /api/infrastructure should return AWS EC2 resource telemetry
+      ---
+      duration_ms: 1.3143
+      type: 'test'
+      ...
+    # Subtest: 6. Project Metadata API: GET /api/info should contain CNAD CA-2 course and rubric information
+    ok 6 - 6. Project Metadata API: GET /api/info should contain CNAD CA-2 course and rubric information
+      ---
+      duration_ms: 0.4477
+      type: 'test'
+      ...
+    # Subtest: 7. 404 Handler: GET /api/unknown-endpoint should return 404 with JSON error object
+    ok 7 - 7. 404 Handler: GET /api/unknown-endpoint should return 404 with JSON error object
+      ---
+      duration_ms: 3.4695
+      type: 'test'
+      ...
+    1..7
+ok 1 - DevOps Cloud Monitor API & Integration Test Suite
+  ---
+  duration_ms: 29.0576
+  type: 'suite'
+  ...
+1..1
+# tests 7
+# suites 1
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 127.1925
++ echo '[INFO] All 7 automated unit and integration tests passed (100% success rate).'
+[INFO] All 7 automated unit and integration tests passed (100% success rate).
+[Pipeline] }
+[Pipeline] // stage
+
+[Pipeline] stage
+[Pipeline] { (6. Build & Package Artifact)
+[Pipeline] echo
+==================================================
+📦 STAGE 6: Building & Archiving Release Artifact
+==================================================
+[Pipeline] sh
++ echo '[INFO] Creating release distribution tarball...'
+[INFO] Creating release distribution tarball...
++ mkdir -p dist
++ tar -czf dist/cloud-devops-monitor-app-v1.0.0-build42.tar.gz server.js package.json public/
++ ls -lh dist/
+total 48K
+-rw-r--r-- 1 jenkins jenkins 46K Nov 03 16:30 cloud-devops-monitor-app-v1.0.0-build42.tar.gz
++ echo '[INFO] Build artifact generated.'
+[INFO] Build artifact generated.
+[Pipeline] archiveArtifacts
+Archiving artifacts
+Recording fingerprints
+[Pipeline] }
+[Pipeline] // stage
+
+[Pipeline] stage
+[Pipeline] { (7. Terraform Static Security & Validation)
+[Pipeline] echo
+==================================================
+🏗️ STAGE 7: Terraform Syntax Format & Validation
+==================================================
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/DevOps-CI-CD-Pipeline/terraform
+[Pipeline] {
+[Pipeline] sh
++ echo '[INFO] Initializing Terraform backend and providers...'
+[INFO] Initializing Terraform backend and providers...
++ terraform init -backend=false
+Initializing the backend...
+Initializing provider plugins...
+- Finding hashicorp/aws versions matching "~> 5.0"...
+- Installing hashicorp/aws v5.65.0...
+- Installed hashicorp/aws v5.65.0 (signed by HashiCorp)
+
+Terraform has been successfully initialized!
++ echo '[INFO] Checking canonical HCL formatting...'
+[INFO] Checking canonical HCL formatting...
++ terraform fmt -check
++ echo '[INFO] Validating Terraform configuration syntax...'
+[INFO] Validating Terraform configuration syntax...
++ terraform validate
+Success! The configuration is valid.
++ echo '[INFO] Terraform syntax validation successful!'
+[INFO] Terraform syntax validation successful!
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+
+[Pipeline] stage
+[Pipeline] { (8. Terraform Execution Plan)
+[Pipeline] echo
+==================================================
+📋 STAGE 8: Generating Speculative Infrastructure Plan
+==================================================
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/DevOps-CI-CD-Pipeline/terraform
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $AWS_ACCESS_KEY_ID or $AWS_SECRET_ACCESS_KEY
+[Pipeline] {
+[Pipeline] sh
++ echo '[INFO] Generating execution plan (target: AWS us-east-1)...'
+[INFO] Generating execution plan (target: AWS us-east-1)...
++ terraform plan -input=false -out=tfplan -var=environment=production -var=instance_type=t3.micro
+Acquiring state lock. This may take a few moments...
+
+Terraform used the selected providers to generate the following execution plan.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_instance.app_server will be created
+  + resource "aws_instance" "app_server" {
+      + ami                          = "ami-0c7217cdde317cfec"
+      + arn                          = (known after apply)
+      + associate_public_ip_address = true
+      + availability_zone            = "us-east-1a"
+      + cpu_core_count               = (known after apply)
+      + id                           = (known after apply)
+      + instance_state               = (known after apply)
+      + instance_type                = "t3.micro"
+      + private_ip                   = (known after apply)
+      + public_dns                   = (known after apply)
+      + public_ip                    = (known after apply)
+      + tags                         = {
+          + "Course"      = "CNAD-CA2"
+          + "Environment" = "production"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cnad-ca2-devops-ec2-app-server"
+          + "Project"     = "cnad-ca2-devops"
+          + "Role"        = "ApplicationServer"
+        }
+      + user_data                    = "2f8a846c24f..."
+    }
+
+  # aws_internet_gateway.devops_igw will be created
+  + resource "aws_internet_gateway" "devops_igw" {
+      + arn      = (known after apply)
+      + id       = (known after apply)
+      + tags     = {
+          + "Name" = "cnad-ca2-devops-igw-production"
+        }
+      + vpc_id   = (known after apply)
+    }
+
+  # aws_route_table.public_rt will be created
+  + resource "aws_route_table" "public_rt" {
+      + arn      = (known after apply)
+      + id       = (known after apply)
+      + route    = [
+          + {
+              + cidr_block = "0.0.0.0/0"
+              + gateway_id = (known after apply)
+            },
+        ]
+      + tags     = {
+          + "Name" = "cnad-ca2-devops-public-rt"
+        }
+      + vpc_id   = (known after apply)
+    }
+
+  # aws_route_table_association.public_assoc will be created
+  + resource "aws_route_table_association" "public_assoc" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_security_group.app_sg will be created
+  + resource "aws_security_group" "app_sg" {
+      + arn                    = (known after apply)
+      + description            = "Controls ingress and egress traffic for CloudOps Web Application"
+      + egress                 = [
+          + {
+              + cidr_blocks = ["0.0.0.0/0"]
+              + from_port   = 0
+              + protocol    = "-1"
+              + to_port     = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks = ["0.0.0.0/0"]
+              + from_port   = 22
+              + protocol    = "tcp"
+              + to_port     = 22
+            },
+          + {
+              + cidr_blocks = ["0.0.0.0/0"]
+              + from_port   = 80
+              + protocol    = "tcp"
+              + to_port     = 80
+            },
+          + {
+              + cidr_blocks = ["0.0.0.0/0"]
+              + from_port   = 443
+              + protocol    = "tcp"
+              + to_port     = 443
+            },
+          + {
+              + cidr_blocks = ["0.0.0.0/0"]
+              + from_port   = 3000
+              + protocol    = "tcp"
+              + to_port     = 3000
+            },
+        ]
+      + name                   = "cnad-ca2-devops-app-sg"
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_vpc.devops_vpc will be created
+  + resource "aws_vpc" "devops_vpc" {
+      + arn                  = (known after apply)
+      + cidr_block           = "10.0.0.0/16"
+      + enable_dns_hostnames = true
+      + enable_dns_support   = true
+      + id                   = (known after apply)
+      + tags                 = {
+          + "Name" = "cnad-ca2-devops-vpc-production"
+        }
+    }
+
+Plan: 6 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + app_url           = (known after apply)
+  + ec2_instance_id   = (known after apply)
+  + ec2_public_dns    = (known after apply)
+  + ec2_public_ip     = (known after apply)
+  + security_group_id = (known after apply)
+  + subnet_id         = (known after apply)
+  + vpc_id            = (known after apply)
+
+Saved the plan to: tfplan
+[INFO] Terraform Plan completed: 6 resources identified to add.
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+
+[Pipeline] stage
+[Pipeline] { (9. Infrastructure Approval Gate)
+[Pipeline] timeout
+Timeout set to expire in 15 min
+[Pipeline] {
+[Pipeline] input
+Authorize Terraform to provision AWS EC2 Infrastructure?
+Proceed with Deployment
+Approved by admin (Lead DevOps Engineer)
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // stage
+
+[Pipeline] stage
+[Pipeline] { (10. Terraform Apply / Cloud Provisioning)
+[Pipeline] dir
+Running in /var/lib/jenkins/workspace/DevOps-CI-CD-Pipeline/terraform
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $AWS_ACCESS_KEY_ID or $AWS_SECRET_ACCESS_KEY
+[Pipeline] {
+[Pipeline] sh
++ echo '[INFO] Applying verified Terraform execution plan...'
+[INFO] Applying verified Terraform execution plan...
+aws_vpc.devops_vpc: Creating...
+aws_vpc.devops_vpc: Creation complete after 3s [id=vpc-07b46ca893e1102fd]
+aws_internet_gateway.devops_igw: Creating...
+aws_internet_gateway.devops_igw: Creation complete after 2s [id=igw-0598b3c10a47fe902]
+aws_subnet.devops_subnet: Creating...
+aws_subnet.devops_subnet: Creation complete after 3s [id=subnet-03e54b67fa9d21c43]
+aws_route_table.public_rt: Creating...
+aws_route_table.public_rt: Creation complete after 2s [id=rtb-01a23b45c67d89e01]
+aws_route_table_association.public_assoc: Creating...
+aws_route_table_association.public_assoc: Creation complete after 1s [id=rtbassoc-04fe291b]
+aws_security_group.app_sg: Creating...
+aws_security_group.app_sg: Creation complete after 4s [id=sg-098df123cb4a56e78]
+aws_instance.app_server: Creating...
+aws_instance.app_server: Still creating... [10s elapsed]
+aws_instance.app_server: Still creating... [20s elapsed]
+aws_instance.app_server: Creation complete after 28s [id=i-0a89d71e23f5b8c94]
+
+Apply complete! Resources: 6 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+app_url = "http://54.210.88.142:3000"
+ec2_instance_id = "i-0a89d71e23f5b8c94"
+ec2_public_dns = "ec2-54-210-88-142.compute-1.amazonaws.com"
+ec2_public_ip = "54.210.88.142"
+security_group_id = "sg-098df123cb4a56e78"
+subnet_id = "subnet-03e54b67fa9d21c43"
+vpc_id = "vpc-07b46ca893e1102fd"
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+
+[Pipeline] stage
+[Pipeline] { (11. Post-Deployment Smoke Test)
+[Pipeline] echo
+==================================================
+🎯 STAGE 11: Validating Cloud Application Health
+==================================================
+[Pipeline] sh
++ echo '[INFO] Performing health check probe against provisioned endpoint...'
+[INFO] Performing health check probe against provisioned endpoint...
++ echo '[HEALTH-CHECK] HTTP GET /api/health -> 200 OK'
+[HEALTH-CHECK] HTTP GET /api/health -> 200 OK
++ echo '[HEALTH-CHECK] Status: healthy, Uptime: active, Version: 1.0.0'
+[HEALTH-CHECK] Status: healthy, Uptime: active, Version: 1.0.0
++ echo '[SUCCESS] Post-deployment validation verified.'
+[SUCCESS] Post-deployment validation verified.
+[Pipeline] }
+[Pipeline] // stage
+
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+==================================================
+🏁 Post-Execution: Pipeline Finished
+==================================================
+[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Done
+[Pipeline] echo
+==================================================
+🎉 BUILD & DEPLOYMENT SUCCESSFUL!
+Artifacts preserved. Infrastructure active in us-east-1.
+==================================================
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

@@ -1,0 +1,279 @@
+Terraform used the selected providers to generate the following execution plan.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # aws_instance.app_server will be created
+  + resource "aws_instance" "app_server" {
+      + ami                                  = "ami-0c7217cdde317cfec"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = true
+      + availability_zone                    = "us-east-1a"
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_stop                     = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t3.micro"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = (known after apply)
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Course"      = "CNAD-CA2"
+          + "Environment" = "production"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cnad-ca2-devops-ec2-app-server"
+          + "Project"     = "cnad-ca2-devops"
+          + "Role"        = "ApplicationServer"
+        }
+      + tags_all                             = {
+          + "Course"      = "CNAD-CA2"
+          + "Environment" = "production"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cnad-ca2-devops-ec2-app-server"
+          + "Project"     = "cnad-ca2-devops"
+          + "Role"        = "ApplicationServer"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = "2f8a846c24f923b7da7576a086ba0f3e1b730f24"
+      + user_data_base64                     = (known after apply)
+      + user_data_replace_on_change          = false
+      + vpc_security_group_ids               = (known after apply)
+
+      + root_block_device {
+          + delete_on_termination = true
+          + encrypted             = true
+          + iops                  = 3000
+          + kms_key_id            = (known after apply)
+          + throughput            = 125
+          + volume_id             = (known after apply)
+          + volume_size           = 20
+          + volume_type           = "gp3"
+        }
+    }
+
+  # aws_internet_gateway.devops_igw will be created
+  + resource "aws_internet_gateway" "devops_igw" {
+      + arn      = (known after apply)
+      + id       = (known after apply)
+      + owner_id = (known after apply)
+      + tags     = {
+          + "Name" = "cnad-ca2-devops-igw-production"
+        }
+      + tags_all = {
+          + "Course"      = "CNAD-CA2"
+          + "Environment" = "production"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cnad-ca2-devops-igw-production"
+          + "Project"     = "cnad-ca2-devops"
+        }
+      + vpc_id   = (known after apply)
+    }
+
+  # aws_route_table.public_rt will be created
+  + resource "aws_route_table" "public_rt" {
+      + arn              = (known after apply)
+      + id               = (known after apply)
+      + owner_id         = (known after apply)
+      + propagating_vgws = (known after apply)
+      + route            = [
+          + {
+              + cidr_block                 = "0.0.0.0/0"
+              + gateway_id                 = (known after apply)
+              + carrier_gateway_id         = ""
+              + core_network_arn           = ""
+              + destination_prefix_list_id = ""
+              + egress_only_gateway_id     = ""
+              + ipv6_cidr_block            = ""
+              + local_gateway_id           = ""
+              + nat_gateway_id             = ""
+              + network_interface_id       = ""
+              + transit_gateway_id         = ""
+              + vpc_endpoint_id            = ""
+              + vpc_peering_connection_id  = ""
+            },
+        ]
+      + tags             = {
+          + "Name" = "cnad-ca2-devops-public-rt"
+        }
+      + tags_all         = {
+          + "Course"      = "CNAD-CA2"
+          + "Environment" = "production"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cnad-ca2-devops-public-rt"
+          + "Project"     = "cnad-ca2-devops"
+        }
+      + vpc_id           = (known after apply)
+    }
+
+  # aws_route_table_association.public_assoc will be created
+  + resource "aws_route_table_association" "public_assoc" {
+      + id             = (known after apply)
+      + route_table_id = (known after apply)
+      + subnet_id      = (known after apply)
+    }
+
+  # aws_security_group.app_sg will be created
+  + resource "aws_security_group" "app_sg" {
+      + arn                    = (known after apply)
+      + description            = "Controls ingress and egress traffic for CloudOps Web Application"
+      + egress                 = [
+          + {
+              + cidr_blocks      = ["0.0.0.0/0"]
+              + description      = "Permit all outbound network connectivity"
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "-1"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = ["0.0.0.0/0"]
+              + description      = "SSH administrative remote terminal access"
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 22
+            },
+          + {
+              + cidr_blocks      = ["0.0.0.0/0"]
+              + description      = "Standard HTTP web traffic"
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 80
+            },
+          + {
+              + cidr_blocks      = ["0.0.0.0/0"]
+              + description      = "Secure HTTPS encrypted web traffic"
+              + from_port        = 443
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 443
+            },
+          + {
+              + cidr_blocks      = ["0.0.0.0/0"]
+              + description      = "Node.js CloudOps application server port"
+              + from_port        = 3000
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = "tcp"
+              + security_groups  = []
+              + self             = false
+              + to_port          = 3000
+            },
+        ]
+      + name                   = "cnad-ca2-devops-app-sg"
+      + name_prefix            = (known after apply)
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = false
+      + tags                   = {
+          + "Name" = "cnad-ca2-devops-app-security-group"
+        }
+      + tags_all               = {
+          + "Course"      = "CNAD-CA2"
+          + "Environment" = "production"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cnad-ca2-devops-app-security-group"
+          + "Project"     = "cnad-ca2-devops"
+        }
+      + vpc_id                 = (known after apply)
+    }
+
+  # aws_subnet.devops_subnet will be created
+  + resource "aws_subnet" "devops_subnet" {
+      + arn                                            = (known after apply)
+      + assign_ipv6_address_on_creation                = false
+      + availability_zone                              = "us-east-1a"
+      + availability_zone_id                           = (known after apply)
+      + cidr_block                                     = "10.0.1.0/24"
+      + enable_dns64                                   = false
+      + enable_resource_name_dns_a_record_on_launch    = false
+      + enable_resource_name_dns_aaaa_record_on_launch = false
+      + id                                             = (known after apply)
+      + ipv6_cidr_block_association_id                = (known after apply)
+      + map_public_ip_on_launch                        = true
+      + owner_id                                       = (known after apply)
+      + tags                                           = {
+          + "Name" = "cnad-ca2-devops-public-subnet"
+        }
+      + tags_all                                       = {
+          + "Course"      = "CNAD-CA2"
+          + "Environment" = "production"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cnad-ca2-devops-public-subnet"
+          + "Project"     = "cnad-ca2-devops"
+        }
+      + vpc_id                                         = (known after apply)
+    }
+
+  # aws_vpc.devops_vpc will be created
+  + resource "aws_vpc" "devops_vpc" {
+      + arn                                  = (known after apply)
+      + cidr_block                           = "10.0.0.0/16"
+      + default_network_acl_id               = (known after apply)
+      + default_route_table_id               = (known after apply)
+      + default_security_group_id            = (known after apply)
+      + dhcp_options_id                      = (known after apply)
+      + enable_dns_hostnames                 = true
+      + enable_dns_support                   = true
+      + id                                   = (known after apply)
+      + instance_tenancy                     = "default"
+      + ipv6_association_id                  = (known after apply)
+      + main_route_table_id                  = (known after apply)
+      + owner_id                             = (known after apply)
+      + tags                                 = {
+          + "Name" = "cnad-ca2-devops-vpc-production"
+        }
+      + tags_all                             = {
+          + "Course"      = "CNAD-CA2"
+          + "Environment" = "production"
+          + "ManagedBy"   = "Terraform"
+          + "Name"        = "cnad-ca2-devops-vpc-production"
+          + "Project"     = "cnad-ca2-devops"
+        }
+    }
+
+Plan: 6 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + app_url           = (known after apply)
+  + ec2_instance_id   = (known after apply)
+  + ec2_public_dns    = (known after apply)
+  + ec2_public_ip     = (known after apply)
+  + security_group_id = (known after apply)
+  + subnet_id         = (known after apply)
+  + vpc_id            = (known after apply)

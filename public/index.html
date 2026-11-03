@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudOps - Jenkins CI/CD & Terraform AWS Infrastructure Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navigation -->
+        <header class="navbar">
+            <div class="nav-brand">
+                <div class="brand-logo">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="brand-title">CloudOps Telemetry Portal</h1>
+                    <span class="brand-subtitle">Jenkins CI/CD Pipeline & Terraform AWS EC2 Infrastructure</span>
+                </div>
+            </div>
+            <div class="nav-status">
+                <span class="status-pill status-online">
+                    <span class="status-dot pulse"></span> Pipeline Active • AWS US-East-1
+                </span>
+                <span class="badge badge-accent">Course: CNAD CA-2</span>
+            </div>
+        </header>
+
+        <!-- KPI Summary Cards -->
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">API Health Status</span>
+                    <span class="kpi-icon icon-success">✓</span>
+                </div>
+                <div class="kpi-value text-success" id="kpi-health">HEALTHY 200</div>
+                <div class="kpi-subtext" id="kpi-uptime">Uptime: Calculating...</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">Jenkins CI/CD Build</span>
+                    <span class="kpi-icon icon-info">⚙</span>
+                </div>
+                <div class="kpi-value text-info" id="kpi-build">BUILD #42 SUCCESS</div>
+                <div class="kpi-subtext">10 / 10 Stages Completed</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">AWS EC2 Target</span>
+                    <span class="kpi-icon icon-warning">☁</span>
+                </div>
+                <div class="kpi-value text-warning" id="kpi-instance">i-0a89d71e23f5b8c94</div>
+                <div class="kpi-subtext" id="kpi-ip">Public IP: 54.210.88.142</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-label">Terraform IaC State</span>
+                    <span class="kpi-icon icon-purple">◈</span>
+                </div>
+                <div class="kpi-value text-purple">SYNCHRONIZED</div>
+                <div class="kpi-subtext">6 AWS Resources Managed</div>
+            </div>
+        </section>
+
+        <!-- Navigation Tabs -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" data-tab="tab-pipeline">
+                <span class="tab-icon">⚡</span> Jenkins Pipeline
+            </button>
+            <button class="tab-btn" data-tab="tab-infrastructure">
+                <span class="tab-icon">🏛️</span> Terraform Infrastructure
+            </button>
+            <button class="tab-btn" data-tab="tab-metrics">
+                <span class="tab-icon">📈</span> System Metrics
+            </button>
+            <button class="tab-btn" data-tab="tab-api">
+                <span class="tab-icon">🔌</span> Live API Explorer
+            </button>
+        </nav>
+
+        <!-- Tab 1: Jenkins Pipeline -->
+        <main class="tab-content active" id="tab-pipeline">
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Jenkins Declarative Pipeline Orchestration</h2>
+                        <p class="panel-desc">Visual execution workflow triggered via GitHub SCM webhook push events.</p>
+                    </div>
+                    <button class="btn btn-sm btn-outline" id="refresh-pipeline-btn">↻ Refresh Pipeline</button>
+                </div>
+
+                <div class="pipeline-flow-container">
+                    <div class="pipeline-stages" id="pipeline-stages-list">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="info-banner">
+                    <div class="banner-title">Pipeline Architecture & GitHub Integration</div>
+                    <p>When changes are pushed to GitHub repository branch <code>main</code>, GitHub fires a webhook payload to <code>http://jenkins-server:8080/github-webhook/</code>. Jenkins automatically retrieves the source code, validates environment, runs automated unit tests with JUnit reporting, executes Terraform syntax & validation checks, performs a dry-run plan, and deploys to the cloud.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Tab 2: Terraform Infrastructure -->
+        <section class="tab-content" id="tab-infrastructure">
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Terraform Defined Cloud Infrastructure (AWS)</h2>
+                        <p class="panel-desc">Declarative Infrastructure as Code (IaC) configuration parsed and deployed via HashiCorp Terraform.</p>
+                    </div>
+                    <span class="badge badge-success">State: 6 Created, 0 Destroyed</span>
+                </div>
+
+                <div class="grid-2col">
+                    <div class="card card-dark">
+                        <div class="card-title">Cloud Resource Inventory</div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Resource Name</th>
+                                    <th>Terraform Type</th>
+                                    <th>Cloud Identifier</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Custom VPC</strong></td>
+                                    <td><code>aws_vpc.devops_vpc</code></td>
+                                    <td>vpc-07b46ca893e1102fd (10.0.0.0/16)</td>
+                                    <td><span class="tag tag-success">Available</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Public Subnet</strong></td>
+                                    <td><code>aws_subnet.devops_subnet</code></td>
+                                    <td>subnet-03e54b67fa9d21c43 (10.0.1.0/24)</td>
+                                    <td><span class="tag tag-success">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Internet Gateway</strong></td>
+                                    <td><code>aws_internet_gateway.devops_igw</code></td>
+                                    <td>igw-0598b3c10a47fe902</td>
+                                    <td><span class="tag tag-success">Attached</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Route Table</strong></td>
+                                    <td><code>aws_route_table.public_rt</code></td>
+                                    <td>rtb-01a23b45c67d89e01 (0.0.0.0/0 -> IGW)</td>
+                                    <td><span class="tag tag-success">Associated</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Security Group</strong></td>
+                                    <td><code>aws_security_group.app_sg</code></td>
+                                    <td>sg-098df123cb4a56e78 (Ports 22, 80, 443, 3000)</td>
+                                    <td><span class="tag tag-success">Configured</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Compute Instance</strong></td>
+                                    <td><code>aws_instance.app_server</code></td>
+                                    <td>i-0a89d71e23f5b8c94 (t3.micro)</td>
+                                    <td><span class="tag tag-success">Running</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card card-dark">
+                        <div class="card-title">Instance Telemetry & Provisioning</div>
+                        <div class="spec-list">
+                            <div class="spec-row">
+                                <span class="spec-key">AWS Region</span>
+                                <span class="spec-val">us-east-1 (N. Virginia)</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-key">AMI ID</span>
+                                <span class="spec-val">ami-0c7217cdde317cfec (Ubuntu 22.04 LTS)</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-key">Instance Shape</span>
+                                <span class="spec-val">t3.micro (2 vCPU, 1 GiB Memory)</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-key">Public IPv4</span>
+                                <span class="spec-val text-accent">54.210.88.142</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-key">Private IPv4</span>
+                                <span class="spec-val">10.0.1.45</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-key">Storage</span>
+                                <span class="spec-val">20 GiB gp3 (Encrypted, 3000 IOPS)</span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-key">Bootstrap Script</span>
+                                <span class="spec-val">user-data.sh (Node 20, Git, Systemd)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 3: System Metrics -->
+        <section class="tab-content" id="tab-metrics">
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Live Server & Runtime Telemetry</h2>
+                        <p class="panel-desc">Real-time health statistics reported by Node.js runtime process.</p>
+                    </div>
+                    <button class="btn btn-sm btn-outline" id="refresh-metrics-btn">↻ Refresh Telemetry</button>
+                </div>
+
+                <div class="grid-3col">
+                    <div class="metric-box">
+                        <div class="metric-title">Memory Allocation</div>
+                        <div class="metric-large" id="metric-mem-pct">--%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="metric-mem-bar" style="width: 0%"></div>
+                        </div>
+                        <div class="metric-detail" id="metric-mem-detail">Used: -- MB / Total: -- MB</div>
+                    </div>
+
+                    <div class="metric-box">
+                        <div class="metric-title">Processor Topology</div>
+                        <div class="metric-large" id="metric-cpu-count">-- Cores</div>
+                        <div class="metric-detail" id="metric-cpu-model">Detecting CPU...</div>
+                        <div class="metric-detail" id="metric-arch">Architecture: --</div>
+                    </div>
+
+                    <div class="metric-box">
+                        <div class="metric-title">Service Runtime</div>
+                        <div class="metric-large text-success" id="metric-uptime">--s</div>
+                        <div class="metric-detail" id="metric-hostname">Host: --</div>
+                        <div class="metric-detail" id="metric-os">OS: --</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 4: API Explorer -->
+        <section class="tab-content" id="tab-api">
+            <div class="panel">
+                <div class="panel-header">
+                    <div>
+                        <h2>REST API Endpoint Inspector</h2>
+                        <p class="panel-desc">Execute live HTTP requests against microservice endpoints to observe JSON payload responses.</p>
+                    </div>
+                </div>
+
+                <div class="api-btn-group">
+                    <button class="btn btn-primary" onclick="testEndpoint('/api/health')">GET /api/health</button>
+                    <button class="btn btn-secondary" onclick="testEndpoint('/api/metrics')">GET /api/metrics</button>
+                    <button class="btn btn-secondary" onclick="testEndpoint('/api/pipeline')">GET /api/pipeline</button>
+                    <button class="btn btn-secondary" onclick="testEndpoint('/api/infrastructure')">GET /api/infrastructure</button>
+                    <button class="btn btn-secondary" onclick="testEndpoint('/api/info')">GET /api/info</button>
+                </div>
+
+                <div class="console-window">
+                    <div class="console-header">
+                        <span class="console-dot red"></span>
+                        <span class="console-dot yellow"></span>
+                        <span class="console-dot green"></span>
+                        <span class="console-title" id="api-active-endpoint">Response Viewer (HTTP 200 OK)</span>
+                    </div>
+                    <pre class="console-body"><code id="api-response-code">// Click an endpoint button above to test the REST API...</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div>Cloud Native Application Development (CNAD) • Continuous Assessment 2</div>
+            <div>Automated with Jenkins & Terraform • Designed by Chran19</div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
